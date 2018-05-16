@@ -4,7 +4,8 @@
     <head lang="ja">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Boilerplate</title>
+    <title>PWA Sample</title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="/bundle.css">
   </head>
   </head>
@@ -12,6 +13,19 @@
     <div id="root">
 
     </div>
+    <script>
+      window.addEventListener('load', () => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('success, scope:', registration.scope)
+            })
+            .catch((err) => {
+              console.warn('faild: ', err)
+            })
+        }
+      });
+    </script>
     <script type="text/javascript" src="/bundle.js"></script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 # bundleファイル
 public/*
+!public/assets/
 !public/index.html
 !public/manifest.json
 !public/sw.js
