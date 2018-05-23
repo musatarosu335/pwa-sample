@@ -37,3 +37,18 @@ self.addEventListener('fetch', (event) => {
     });
   }));
 });
+
+// Service Workerの更新
+self.addEventListener('active', (event) => {
+  // ここで指定したCACHE_NAMEのキャッシュは削除されない
+  // 新しく指定するCACHE_NAMEなどを指定する
+  const cacheWhitelist = ['test-pwa-cache-v2'];
+
+  event.waitUntil(caches.keys().then(cacheNames => (
+    Promise.all(cacheNames.map((cacheName) => {
+      if (cacheWhitelist.indexOf(cacheName) === -1) {
+        return caches.delete(cacheName); // キャッシュを削除
+      }
+    }))
+  )));
+});
